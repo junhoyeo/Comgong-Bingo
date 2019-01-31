@@ -8,13 +8,18 @@
     <h1>컴공과 빙고</h1>
     <table>
         <tbody>
-            <tr v-for="idx in Math.ceil(data.length / 5)">
-                <td v-for="square in data.slice((idx - 1) * 5, idx * 5)" class="square">
+            <tr v-for="row in Math.ceil(data.length / 5)">
+                <td v-for="(square, index) in data.slice((row - 1) * 5, row * 5)" 
+                    v-bind:id="`square-${(row-1)*5+index}`" v-on:click="click((row-1)*5+index)">
                     {{square}}
                 </td>
             </tr>
         </tbody>
     </table>
+    <h3>빙고: {{bingo}}개</h3>
+    <div id="footer">
+        <a href="https://github.com/junhoyeo">2019@JunhoYeo</a>
+    </div>
 </div>
 <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
 <script src="./data.js"></script>

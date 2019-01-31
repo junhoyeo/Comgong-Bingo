@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css'); 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:700');
 body {
+    font-family: 'Nanum Gothic Coding', monospace;
+    background-color: #272822;
     text-align: center;
+}
+h1 {
+    font-family: 'Noto Sans', sans-serif;
+    color: #3E3D32;
+    background-color: #FFE792;
+    padding: 5px;
+    width: 50%;
+    margin-left: auto; 
+    margin-right: auto;
 }
 table {
     margin-left: auto; 
@@ -7,8 +20,26 @@ table {
     border-collapse: collapse;
 }
 table, th, td {
-    border: 1px solid black;
+    border: 3px solid #F8F8F2;
 }
 td {
-    padding: 30px;
+    color: #75715E;
+    background-color: none;
+    padding: 25px;
+}
+td.selected {
+    color: #FFE792;
+    background-color: #75715E;
+}
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+a {
+    color: #F92672;
+    text-decoration: none;
 }
