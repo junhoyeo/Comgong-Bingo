@@ -27,10 +27,6 @@ td {
     background-color: none;
     padding: 25px;
 }
-td.selected {
-    color: #FFE792;
-    background-color: #75715E;
-}
 #footer {
     position: fixed;
     left: 0;
