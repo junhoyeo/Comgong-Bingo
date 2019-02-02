@@ -14,11 +14,14 @@
         </tbody>
     </table>
 
-    <modal name="share" height="auto" :scrollable="true">
-      이름을 입력해 주세요: <input v-model.trim="name"/><br/>
-      <textarea id="share" readonly>{{ share() }}</textarea><br/>
-      위 링크를 친구들에게 공유하세요!<br/>
-      <button v-on:click="copy">클립보드로 복사하기</button>
+    <modal name="share" class="share" height="auto" :scrollable="true">
+      <div class="share-wrap">
+        <h1>공유하기</h1>
+        이름을 입력해 주세요: <input v-model.trim="name"/><br/>
+        <input id="share" v-bind:value="share()" readonly/><br/>
+        위 링크를 친구들에게 공유하세요!<br/>
+        <button v-on:click="copy">클립보드로 복사하기</button>
+      </div>
     </modal>
 
     <h3>빙고: {{bingo}}개</h3>
@@ -33,7 +36,8 @@
 </template>
 
 <script>
-import data from '../bingo.json'
+import data from './bingo.json' // bingo data
+import rules from './rule.json' // bingo rule 
 
 export default {
   name: 'Bingo',
@@ -56,7 +60,8 @@ export default {
             this.selected.push(i)
         }
       }
-      window.console.log(this.selected)
+      // window.console.log(this.selected)
+      this.check()
     }
   },
   data: function () {
@@ -84,6 +89,15 @@ export default {
       }
       window.console.log(this.selected)
       this.save()
+      this.check()
+    },
+    check: function () {
+      this.bingo = 0
+      for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i]
+        if (rule.every(elem => this.selected.indexOf(elem) > -1))
+          this.bingo++
+      }
     },
     pack: function (array) {
       var packed = []
@@ -167,6 +181,25 @@ td {
     color: #75715E;
     background-color: none;
     padding: 25px;
+}
+div.v--modal {
+  text-align: center;
+}
+div.v--modal div.share-wrap {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+div.v--modal input#share {
+  width: 80%;
+  color: black;
+  background-color: white;
+  border: 5px solid skyblue;
+  border-radius: 15px;
+}
+div.v--modal button {
+  width: 50%;
+  color: black;
+  border-radius: 15px;
 }
 #footer {
     position: fixed;

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Bingo from './components/Bingo'
+import Bingo from './Bingo'
 
 export default {
   name: 'app',
