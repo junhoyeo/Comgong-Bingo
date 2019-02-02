@@ -16,28 +16,32 @@
 
     <modal name="share" class="share" height="auto" :scrollable="true">
       <div class="share-wrap">
-        <h1>공유하기</h1>
-        이름을 입력해 주세요: <input v-model.trim="name"/><br/>
-        <input id="share" v-bind:value="share()" readonly/><br/>
-        위 링크를 친구들에게 공유하세요!<br/>
-        <button v-on:click="copy">클립보드로 복사하기</button>
+        <h2>공유하기</h2>
+        <p id="result">{{ bingo }}개 빙고 달성!</p>
+        <p class="help">여러분의 <strong>이름</strong>을 입력해 주세요</p>
+        <input id="name" v-model.trim="name"/><br/>
+        <div v-if="name">
+          <p class="help">아래 링크를 친구들에게 공유하세요!</p>
+          <input id="share" v-bind:value="share()" readonly/>
+          <button class="btn" v-on:click="copy"><i class="far fa-copy"></i> 클립보드로 복사하기</button>
+        </div>
       </div>
     </modal>
 
-    <h3>빙고: {{bingo}}개</h3>
-    <button v-if="!view" v-on:click="show">공유하기</button>
-    <button v-else v-on:click="clear">나도 해보기</button>
+    <h3 class="bingo-num">빙고: {{bingo}}개</h3>
+    <button class="btn" v-if="!view" v-on:click="show"><i class="far fa-share-square"></i> 공유하기</button>
+    <button class="btn" v-else v-on:click="clear"><i class="far fa-play-circle"></i> 나도 해보기</button>
     <div id="footer">
-        <a href="https://github.com/junhoyeo">2019@JunhoYeo 
-            <span v-bind:style="{color:'white'}">GitHub</span>
-        </a>
+      /* Created by <a href="https://github.com/junhoyeo"><u>2019@JunhoYeo</u></a> 
+      / <a href="https://github.com/junhoyeo/Comgong-Bingo"><u>Project Github</u></a> */
     </div>
   </div>
 </template>
 
 <script>
-import data from './bingo.json' // bingo data
-import rules from './rule.json' // bingo rule 
+import data from './assets/bingo.json' // bingo data
+import rules from './assets/rule.json' // bingo rule 
+require('./assets/style.css') // style
 
 export default {
   name: 'Bingo',
@@ -60,7 +64,7 @@ export default {
             this.selected.push(i)
         }
       }
-      // window.console.log(this.selected)
+      window.console.log(this.selected)
       this.check()
     }
   },
@@ -80,14 +84,13 @@ export default {
       this.selected = []
     },
     click: function (idx) {
-      window.console.log(idx)
+      if (this.view) this.view = false
       if (this.selected.includes(idx)) {
         this.selected.splice(this.selected.indexOf(idx), 1)
       } else {
         this.selected.push(idx)
         this.selected.sort((a, b) => a - b)
       }
-      window.console.log(this.selected)
       this.save()
       this.check()
     },
@@ -109,7 +112,11 @@ export default {
       return packed.join('')
     },
     unpack: function (packed) {
-      return packed.match(/\d\d/gi).map(t => parseInt(t, 16))
+      var unpacked = []
+      for (let i = 0; i < packed.length; i += 2) {
+        unpacked.push(parseInt(packed.substr(i, 2), 16))
+      }
+      return unpacked
     },
     save: function () {
       if (this.selected.length > 12) {
@@ -124,7 +131,7 @@ export default {
       }
     },
     share: function () {
-      return window.location + this.save()
+      return window.location.href.split('?')[0] + this.save()
     },
     copy: function () {
       document.getElementById('share').select();
@@ -148,69 +155,3 @@ export default {
   }
 }
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css'); 
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:700');
-body {
-    font-family: 'Nanum Gothic Coding', monospace;
-    background-color: #272822;
-    text-align: center;
-}
-h1 {
-    font-family: 'Noto Sans', sans-serif;
-    color: #3E3D32;
-    background-color: #FFE792;
-    padding: 5px;
-    width: 50%;
-    margin-left: auto; 
-    margin-right: auto;
-}
-h3 {
-  color: #F8F8F2;
-}
-table {
-    margin-left: auto; 
-    margin-right: auto;
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 3px solid #F8F8F2;
-}
-td {
-    color: #75715E;
-    background-color: none;
-    padding: 25px;
-}
-div.v--modal {
-  text-align: center;
-}
-div.v--modal div.share-wrap {
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-div.v--modal input#share {
-  width: 80%;
-  color: black;
-  background-color: white;
-  border: 5px solid skyblue;
-  border-radius: 15px;
-}
-div.v--modal button {
-  width: 50%;
-  color: black;
-  border-radius: 15px;
-}
-#footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-}
-#footer a {
-    color: #F92672;
-    text-decoration: none;
-}
-</style>
