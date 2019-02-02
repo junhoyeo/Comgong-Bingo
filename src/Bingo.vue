@@ -32,8 +32,9 @@
     <button class="btn" v-if="!view" v-on:click="show"><i class="far fa-share-square"></i> 공유하기</button>
     <button class="btn" v-else v-on:click="clear"><i class="far fa-play-circle"></i> 나도 해보기</button>
     <div id="footer">
-      /* Created by <a href="https://github.com/junhoyeo"><u>2019@JunhoYeo</u></a> 
-      / <a href="https://github.com/junhoyeo/Comgong-Bingo"><u>Project Github</u></a> */
+      /* Created by <a href="https://github.com/junhoyeo"><u>JunhoYeo</u></a> 
+      / <a href="https://github.com/junhoyeo/Comgong-Bingo"><u>Project Github</u></a> */<br/>
+      /* Contributors: <a href="https://github.com/Astro36"><u>Seungjae Park</u></a>, <a href="https://github.com/SonJimin"><u>BonoLife</u></a> */
     </div>
   </div>
 </template>
