@@ -9,31 +9,61 @@ input:focus {
     outline: none;
 }
 h1 {
+  display: inline-block;
   font-family: 'Noto Sans', sans-serif;
   color: #3E3D32;
   background-color: #FFE792;
   font-size: 2.5em;
-  padding: 5px;
   width: 50%;
+  min-width: 300px;
+  padding: 4px;
   margin-left: auto; 
   margin-right: auto;
 }
 h3 {
   color: #F8F8F2;
 }
+
 table {
-  margin-left: auto; 
-  margin-right: auto;
+  margin: 0 auto;
   border-collapse: collapse;
 }
-table, th, td {
-  font-size: 20px;
-  border: 3px solid #F8F8F2;
+
+td {
+  border: 2px solid #F8F8F2;
+  word-break: keep-all;
 }
+
 td {
   color: #75715E;
   background-color: none;
-  padding: 15px;
+  padding: 4px;
+}
+
+@media screen and (max-width: 511px) {
+  table {
+    width: 95vmin;
+    height: 95vmin;
+  }
+
+  td {
+    width: 20%;
+    height: 20%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 512px) {
+  table {
+    width: 75vmin;
+    height: 75vmin;
+  }
+
+  td {
+    width: 20%;
+    height: 20%;
+    font-size: 20px;
+  }
 }
 
 div.v--modal {
@@ -86,6 +116,7 @@ h3.bingo-num {
 }
 button.btn {
   width: 30%;
+  min-width: 200px;
   padding: 10px;
   border: 5px solid #78DCE8;
   border-radius: 15px;
@@ -101,7 +132,7 @@ button.btn:hover {
   font-family: 'Nanum Gothic Coding', monospace;
   color: #A9DC76;
   font-size: 1.2rem;
-  margin-top: 5px;
+  margin: 16px 0;
 }
 #footer a {
   color: #A9DC76;
